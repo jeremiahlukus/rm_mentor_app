@@ -1,0 +1,27 @@
+PODS:
+  - RSColorPicker (0.9.2)
+  - SVProgressHUD (2.2.2)
+  - XLForm (4.0.0)
+
+DEPENDENCIES:
+  - RSColorPicker
+  - SVProgressHUD
+  - XLForm (from `https://github.com/xmartlabs/XLForm.git`)
+
+EXTERNAL SOURCES:
+  XLForm:
+    :git: https://github.com/xmartlabs/XLForm.git
+
+CHECKOUT OPTIONS:
+  XLForm:
+    :commit: 204cad60453f499448da1bd6278a33951ed94672
+    :git: https://github.com/xmartlabs/XLForm.git
+
+SPEC CHECKSUMS:
+  RSColorPicker: 4d71e12f8e28d44c3885fbb3ba10bc3627bdb393
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+  XLForm: 04110197c12187dd28a6c7295d3d8b95f4fdb4de
+
+PODFILE CHECKSUM: 0d2832f8faccfe2f5841d1b3e55c2b6b57347a93
+
+COCOAPODS: 1.4.0
