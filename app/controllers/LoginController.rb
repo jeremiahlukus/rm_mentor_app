@@ -49,7 +49,13 @@ class LoginController < PM::XLFormScreen
     #SVProgressHUD.showWithStatus("Logging in", maskType:SVProgressHUDMaskTypeGradient)
     BW::HTTP.post(API_LOGIN_ENDPOINT, { headers: headers, payload: data } ) do |response|
       if response.status_description.nil?
-        App.alert(response.error_message)
+          alert = UIAlertView.alloc.initWithTitle("Login Successful",
+                                                  message: response.error_message,
+                                                   delegate: nil,
+                                                   cancelButtonTitle: "OK",
+                                                   otherButtonTitles: nil)
+          alert.show
+        
       else
         if response.ok?
           json = BW::JSON.parse(response.body.to_s)
@@ -63,7 +69,7 @@ class LoginController < PM::XLFormScreen
           alert.show
          
           self.navigationController.dismissModalViewControllerAnimated(true)
-          TasksListController.controller.refresh
+          RootController.controller.refresh
         elsif response.status_code.to_s =~ /40\d/
           alert = UIAlertView.alloc.initWithTitle("Login Failed",
                                                    message: "Please Try Again",

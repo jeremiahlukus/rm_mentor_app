@@ -1,13 +1,13 @@
-class TasksListController < UIViewController
+class RootController < UIViewController
 
   def self.controller
-    @controller ||= TasksListController.alloc.initWithNibName(nil, bundle:nil)
+    @controller ||= RootController.alloc.initWithNibName(nil, bundle:nil)
   end
 
   def viewDidLoad
     super
 
-    self.title = "Tasks"
+    self.title = "Your Stuff"
     self.view.backgroundColor = UIColor.whiteColor
 
     logoutButton = UIBarButtonItem.alloc.initWithTitle("Logout",
