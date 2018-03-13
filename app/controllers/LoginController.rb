@@ -69,7 +69,7 @@ class LoginController < PM::XLFormScreen
           alert.show
          
           self.navigationController.dismissModalViewControllerAnimated(true)
-          RootController.controller.refresh
+          FeedbacrController.controller.refresh
         elsif response.status_code.to_s =~ /40\d/
           alert = UIAlertView.alloc.initWithTitle("Login Failed",
                                                    message: "Please Try Again",

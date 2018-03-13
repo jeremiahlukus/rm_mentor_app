@@ -100,7 +100,7 @@ form_options on_save: :register
                                                    otherButtonTitles: nil)
                       alert.show
               self.navigationController.dismissModalViewControllerAnimated(true)
-              RootController.controller.refresh
+              FeedbackController.controller.refresh
             elsif response.status_code.to_s =~ /40\d/
                       alert = UIAlertView.alloc.initWithTitle("Registration Failed",
                                                    message: "Please Try Again",

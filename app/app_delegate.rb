@@ -4,7 +4,7 @@ class AppDelegate
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
     @navigationController = UINavigationController.alloc.init
-    @navigationController.pushViewController(RootController.controller,
+    @navigationController.pushViewController(FeedbackController.controller,
                                              animated:false)
 
     @window.rootViewController = @navigationController
@@ -22,7 +22,7 @@ class AppDelegate
     @welcomeNavigationController = UINavigationController.alloc.init
     @welcomeNavigationController.pushViewController(@welcomeController, animated:false)
 
-    RootController.controller.presentModalViewController(@welcomeNavigationController,
+    FeedbackController.controller.presentModalViewController(@welcomeNavigationController,
                                                               animated:true)
   end
     def logout
