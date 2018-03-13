@@ -2,7 +2,7 @@ class Feedback
   API_FEEDBACKS_ENDPOINT = "http://localhost:3000/feedbacks"
 
   
-  PROPERTIES = [:id, :title, :completed] 
+  PROPERTIES = [:body,:id, :title,:user_id, :completed, :recipient_id] 
 
   PROPERTIES.each do |prop|
     attr_accessor prop
@@ -28,10 +28,11 @@ class Feedback
           #                                         cancelButtonTitle: "OK",
           #                                         otherButtonTitles: nil)
           # alert.show
-          # json = BW::JSON.parse(response.body.to_s)
+          json = BW::JSON.parse(response.body.to_s)
           # feedbacksData = json['data']['feedbacks'] || []
-          # feedbacks = feedbacksData.map { |feedback| Feedback.new(feedback) }
-          # block.call(feedbacks)
+          feedbacks = json.map { |feedback| Feedback.new(feedback) }
+          puts "#{feedbacks}"
+          block.call(feedbacks)
         elsif response.status_code.to_s =~ /40\d/
           alert = UIAlertView.alloc.initWithTitle("Not authorized",
                                                   message: "Not authorized",
