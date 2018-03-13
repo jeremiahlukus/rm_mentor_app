@@ -78,22 +78,22 @@ class FeedbackController < UIViewController
 
   # Controller methods
   def refresh
-    SVProgressHUD.showWithStatus("Loading", maskType:SVProgressHUDMaskTypeGradient)
+    #SVProgressHUD.showWithStatus("Loading", maskType:SVProgressHUDMaskTypeGradient)
     Feedback.all do |jsonfeedbacks|
       self.feedbacks.clear
       self.feedbacks = jsonFeedbacks
       @feedbacksTableView.reloadData
-      SVProgressHUD.dismiss
+     # SVProgressHUD.dismiss
     end
   end
 
   def addNewFeedback
-    @newFeedbackController = NewfeedbackController.alloc.init
-    @newFeedbackNavigationController = UINavigationController.alloc.init
-    @newFeedbackNavigationController.pushViewController(@newfeedbackController, animated:false)
-    @newFeedbackNavigationController.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor)
+    # @newFeedbackController = NewfeedbackController.alloc.init
+    # @newFeedbackNavigationController = UINavigationController.alloc.init
+    # @newFeedbackNavigationController.pushViewController(@newfeedbackController, animated:false)
+    # @newFeedbackNavigationController.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor)
 
-    self.presentModalViewController(@newFeedbackNavigationController, animated:true)
+    # self.presentModalViewController(@newFeedbackNavigationController, animated:true)
   end
 
   def logout

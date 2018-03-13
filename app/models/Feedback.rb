@@ -1,7 +1,8 @@
 class Feedback
   API_FEEDBACKS_ENDPOINT = "http://localhost:3000/feedbacks"
 
-  PROPERTIES = [:id, :title, :body, :user, :recipient_id, :completed]
+  
+  PROPERTIES = [:id, :title, :completed] 
 
   PROPERTIES.each do |prop|
     attr_accessor prop
@@ -16,16 +17,21 @@ class Feedback
   end
 
   def self.all(&block)
-    BW::HTTP.get("#{API_FEEDBACKS_ENDPOINT}.json", { headers: feedback.headers }) do |response|
+    BW::HTTP.get("#{API_FEEDBACKS_ENDPOINT}.json", { headers: Feedback.headers }) do |response|
       if response.status_description.nil?
         App.alert(response.error_message)
       else
         if response.ok?
-          mp response
-          json = BW::JSON.parse(response.body.to_str)
-          feedbacksData = json[:data][:feedbacks] || []
-          feedbacks = feedbacksData.map { |feedback| Feedback.new(feedback) }
-          block.call(feedbacks)
+          # alert = UIAlertView.alloc.initWithTitle("Your in",
+          #                                         message: response.body,
+          #                                         delegate: nil,
+          #                                         cancelButtonTitle: "OK",
+          #                                         otherButtonTitles: nil)
+          # alert.show
+          # json = BW::JSON.parse(response.body.to_s)
+          # feedbacksData = json['data']['feedbacks'] || []
+          # feedbacks = feedbacksData.map { |feedback| Feedback.new(feedback) }
+          # block.call(feedbacks)
         elsif response.status_code.to_s =~ /40\d/
           alert = UIAlertView.alloc.initWithTitle("Not authorized",
                                                   message: "Not authorized",
@@ -48,7 +54,7 @@ class Feedback
   def self.create(params = {}, &block)
     data = BW::JSON.generate(params)
 
-    BW::HTTP.post("#{API_FEEDBACKS_ENDPOINT}.json", { headers: feedback.headers, payload: data } ) do |response|
+    BW::HTTP.post("#{API_FEEDBACKS_ENDPOINT}.json", { headers: Feedback.headers, payload: data } ) do |response|
       if response.status_description.nil?
         alert = UIAlertView.alloc.initWithTitle("Error",
                                                 message: response.error_message,
@@ -81,7 +87,7 @@ class Feedback
 
   def toggle_completed(&block)
     url = "#{API_FEEDBACKS_ENDPOINT}/#{self.id}/#{self.completed ? 'open' : 'complete'}.json"
-    BW::HTTP.put(url, { headers: feedback.headers }) do |response|
+    BW::HTTP.put(url, { headers: Feedback.headers }) do |response|
       if response.status_description.nil?
         alert = UIAlertView.alloc.initWithTitle("Error",
                                                 message: response.error_message,

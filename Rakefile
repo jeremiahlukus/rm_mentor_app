@@ -26,6 +26,7 @@ Motion::Project::App.setup do |app|
   # version for your app
   app.version = '1.0'
   app.pods do
+    pod 'AFNetworking'
     pod 'SVProgressHUD'
   end
 
