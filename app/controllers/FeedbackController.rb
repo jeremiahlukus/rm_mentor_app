@@ -81,7 +81,7 @@ class FeedbackController < UIViewController
     #SVProgressHUD.showWithStatus("Loading", maskType:SVProgressHUDMaskTypeGradient)
     Feedback.all do |jsonfeedbacks|
       self.feedbacks.clear
-      self.feedbacks = jsonFeedbacks
+      self.feedbacks = jsonfeedbacks
       @feedbacksTableView.reloadData
      # SVProgressHUD.dismiss
     end
