@@ -25,7 +25,15 @@ class FeedbackController < UIViewController
     newFeedbackButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd,
                                                                       target:self,
                                                                       action:'addNewFeedback')
-    self.navigationItem.rightBarButtonItems = [refreshButton, newFeedbackButton]
+
+     questionButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemPlay,
+                                                                      target:self,
+                                                                      action:'questionController')
+
+
+
+  
+    self.navigationItem.rightBarButtonItems = [questionButton, refreshButton, newFeedbackButton]
 
 
     @feedbacksTableView = UITableView.alloc.initWithFrame([[0, 0],
@@ -36,6 +44,8 @@ class FeedbackController < UIViewController
     @feedbacksTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
 
     self.view.addSubview(@feedbacksTableView)
+
+ 
 
     refresh if App::Persistence['authToken']
   end
@@ -49,12 +59,13 @@ class FeedbackController < UIViewController
     @reuseIdentifier ||= "CELL_IDENTIFIER"
 
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
-      UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
+    UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:@reuseIdentifier)
     end
 
     feedback = self.feedbacks[indexPath.row]
 
     cell.textLabel.text = feedback.title
+    cell.detailTextLabel.text = feedback.body
 
     if feedback.completed
       cell.textLabel.color = '#aaaaaa'.to_color
@@ -83,9 +94,15 @@ class FeedbackController < UIViewController
       self.feedbacks.clear
       self.feedbacks = jsonfeedbacks
       @feedbacksTableView.reloadData
-     # SVProgressHUD.dismiss
+      # SVProgressHUD.dismiss
     end
   end
+
+  def questionController
+   view_b = QuestionController.alloc.init
+    self.presentViewController view_b, animated:true, completion:nil
+  end
+
 
   def addNewFeedback
     # @newFeedbackController = NewfeedbackController.alloc.init
