@@ -1,8 +1,8 @@
 class Question
-  API_QUESTIONS_ENDPOINT = "https://rails-mentor-api.herokuapp.com/questions"
+  API_questions_ENDPOINT = "https://rails-mentor-api.herokuapp.com/questions"
 
   
-  PROPERTIES = [:body, :id, :title, :correct] 
+  PROPERTIES = [:body,:id, :title,:user_id, :completed, :recipient_id] 
 
   PROPERTIES.each do |prop|
     attr_accessor prop
@@ -17,24 +17,22 @@ class Question
   end
 
   def self.all(&block)
-    BW::HTTP.get("#{API_QUESTIONS_ENDPOINT}.json", { headers: Question.headers }) do |response|
+    BW::HTTP.get("#{API_questions_ENDPOINT}.json", { headers: Question.headers }) do |response|
       if response.status_description.nil?
         App.alert(response.error_message)
       else
         if response.ok?
-          alert = UIAlertView.alloc.initWithTitle("You are in",
-                                                  message: response.body,
-                                                  delegate: nil,
-                                                  cancelButtonTitle: "OK",
-                                                  otherButtonTitles: nil)
-          alert.show
-          #json = BW::JSON.parse(response.body.to_s)
-          #questions = json.map { |question| Question.new(question) }
-          #puts "#{questions}"
-          #block.call(questions)
+          # alert = UIAlertView.alloc.initWithTitle("Your in",
+          #                                         message: response.body,
+          #                                         delegate: nil,
+          #                                         cancelButtonTitle: "OK",
+          #                                         otherButtonTitles: nil)
+          # alert.show
           json = BW::JSON.parse(response.body.to_s)
-          block.call(json)
-      
+          # questionsData = json['data']['questions'] || []
+          questions = json.map { |question| Question.new(question) }
+          puts "#{questions}"
+          block.call(questions)
         elsif response.status_code.to_s =~ /40\d/
           alert = UIAlertView.alloc.initWithTitle("Not authorized",
                                                   message: "Not authorized",
@@ -57,7 +55,7 @@ class Question
   def self.create(params = {}, &block)
     data = BW::JSON.generate(params)
 
-    BW::HTTP.post("#{API_QUESTIONS_ENDPOINT}.json", { headers: Question.headers, payload: data } ) do |response|
+    BW::HTTP.post("#{API_questions_ENDPOINT}.json", { headers: Question.headers, payload: data } ) do |response|
       if response.status_description.nil?
         alert = UIAlertView.alloc.initWithTitle("Error",
                                                 message: response.error_message,
@@ -70,7 +68,7 @@ class Question
           json = BW::JSON.parse(response.body.to_s)
           block.call(json)
         elsif response.status_code.to_s =~ /40\d/
-          alert = UIAlertView.alloc.initWithTitle("question creation failed",
+          alert = UIAlertView.alloc.initWithTitle("Question creation failed",
                                                   message: "Try again",
                                                   delegate: nil,
                                                   cancelButtonTitle: "OK",
@@ -89,8 +87,8 @@ class Question
   end
 
   def toggle_completed(&block)
-    url = "#{API_QUESTIONS_ENDPOINT}/#{self.id}/#{self.completed ? 'open' : 'complete'}.json"
-    BW::HTTP.put(url, { headers: question.headers }) do |response|
+    url = "#{API_questions_ENDPOINT}/#{self.id}/#{self.completed ? 'open' : 'complete'}.json"
+    BW::HTTP.put(url, { headers: Question.headers }) do |response|
       if response.status_description.nil?
         alert = UIAlertView.alloc.initWithTitle("Error",
                                                 message: response.error_message,
