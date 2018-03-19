@@ -8,6 +8,13 @@ class QuestionController < UIViewController
     self.view.backgroundColor = UIColor.blueColor
 
     # make these the questions on the server @questions = Question.all?
+    # json response is
+    #
+    # [#<Question:0x6040000ac000 @body="This is question one" @id=1 @title="Question 1">, 
+    # #<Question:0x6040000ac300 @body="This is question two" @id=2 @title="Question 2">, 
+    # #<Question:0x6040000ac540 @body="This is question three" @id=3 @title="Question 3">]
+    # 
+    
     @questions = [ { 'title' => "Ruby1", 'body' => "Some ruby question.", 'correct' => 'True' },
                    { 'title' => "Ruby2", 'body' => "Another Ruby question", 'correct' => 'True' },
                    { 'title' => "Ruby3", 'body' => "last Ruby question", 'correct' => 'False' },]
