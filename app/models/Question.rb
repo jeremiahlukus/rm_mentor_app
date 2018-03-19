@@ -1,5 +1,5 @@
 class Question
-  API_QUESTIONS_ENDPOINT = "http://localhost:3000/questions"
+  API_QUESTIONS_ENDPOINT = "https://rails-mentor-api.herokuapp.com/questions"
 
   
   PROPERTIES = [:body, :id, :title, :correct] 

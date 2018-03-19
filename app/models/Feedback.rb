@@ -1,5 +1,5 @@
 class Feedback
-  API_FEEDBACKS_ENDPOINT = "http://localhost:3000/feedbacks"
+  API_FEEDBACKS_ENDPOINT = "https://rails-mentor-api.herokuapp.com/feedbacks"
 
   
   PROPERTIES = [:body,:id, :title,:user_id, :completed, :recipient_id] 
