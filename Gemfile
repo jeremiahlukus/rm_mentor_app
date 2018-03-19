@@ -8,5 +8,6 @@ gem "bubble-wrap", :path => "~/rubymotion/BubbleWrap"
 gem 'motion-cocoapods'
 gem "ProMotion", "~> 2.5"
 gem 'ProMotion-XLForm'
+gem 'afmotion'
 gem "bubble-wrap-http"
 gem 'ruby_motion_query', github: 'infinitered/rmq'

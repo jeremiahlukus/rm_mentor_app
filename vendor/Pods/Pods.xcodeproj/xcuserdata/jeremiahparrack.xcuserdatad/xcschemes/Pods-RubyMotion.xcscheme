@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88E471E74A6CD4BE35EA26BC3DE1E7FD"
+               BlueprintIdentifier = "B2C7F6F92AAC9B8EADBCF2B55E524AB3"
                BlueprintName = "Pods-RubyMotion"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libPods-RubyMotion.a">

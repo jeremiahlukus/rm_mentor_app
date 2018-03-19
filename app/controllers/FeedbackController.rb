@@ -9,7 +9,6 @@ class FeedbackController < UIViewController
     super
 
     self.feedbacks = []
-
     self.title = "Feedbacks"
     self.view.backgroundColor = UIColor.whiteColor
 
@@ -87,6 +86,7 @@ class FeedbackController < UIViewController
     end
   end
 
+
   # Controller methods
   def refresh
     #SVProgressHUD.showWithStatus("Loading", maskType:SVProgressHUDMaskTypeGradient)
@@ -99,7 +99,7 @@ class FeedbackController < UIViewController
   end
 
   def questionController
-   view_b = QuestionController.alloc.init
+    view_b = QuestionController.alloc.init
     self.presentViewController view_b, animated:true, completion:nil
   end
 

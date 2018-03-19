@@ -1,27 +1,20 @@
 class QuestionController < UIViewController 
 
+#  include BW::KVO
   attr_accessor :questions
 
+  def self.controller
+    @controller ||= QuestionController.alloc.initWithNibName(nil, bundle:nil)
+  end
   def viewDidLoad 
     super
-    puts "Hey"
+    self.view.userInteractionEnabled = true 
+    self.view.backgroundColor = UIColor.blueColor 
 
-    self.questions = []
-    self.title = "Questions"
-    
-    puts self.questions.count
-
-
-  end
-  def refresh
-    #SVProgressHUD.showWithStatus("Loading", maskType:SVProgressHUDMaskTypeGradient)
-    Question.all do |jsonfeedbacks|
-      self.questions.clear
-      self.questions = jsonfeedbacks
-      #@feedbacksTableView.reloadData
-      # SVProgressHUD.dismiss
+    Question.all do |question|
+      puts "#{question}"
     end
-  end
 
+  end 
 
-end 
+end

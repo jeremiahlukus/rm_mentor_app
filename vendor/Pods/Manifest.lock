@@ -1,11 +1,32 @@
 PODS:
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - RSColorPicker (0.9.2)
-  - SVProgressHUD (2.2.2)
   - XLForm (4.0.0)
 
 DEPENDENCIES:
+  - AFNetworking
+  - AFNetworking (~> 2.5.0)
   - RSColorPicker
-  - SVProgressHUD
   - XLForm (from `https://github.com/xmartlabs/XLForm.git`)
 
 EXTERNAL SOURCES:
@@ -18,10 +39,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/xmartlabs/XLForm.git
 
 SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   RSColorPicker: 4d71e12f8e28d44c3885fbb3ba10bc3627bdb393
-  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   XLForm: 04110197c12187dd28a6c7295d3d8b95f4fdb4de
 
-PODFILE CHECKSUM: 0d2832f8faccfe2f5841d1b3e55c2b6b57347a93
+PODFILE CHECKSUM: 05fbbff98a48ffeff3d8d375bf464eb4edbeffd4
 
 COCOAPODS: 1.4.0

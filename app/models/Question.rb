@@ -2,7 +2,7 @@ class Question
   API_QUESTIONS_ENDPOINT = "http://localhost:3000/questions"
 
   
-  PROPERTIES = [:id, :title, :body, :correct] 
+  PROPERTIES = [:body, :id, :title, :correct] 
 
   PROPERTIES.each do |prop|
     attr_accessor prop
@@ -28,10 +28,13 @@ class Question
                                                   cancelButtonTitle: "OK",
                                                   otherButtonTitles: nil)
           alert.show
-          $json = BW::JSON.parse(response.body.to_s)
-          $questions = json.map { |question| Question.new(question) }
-          puts "#{$questions}"
-          block.call($questions)
+          #json = BW::JSON.parse(response.body.to_s)
+          #questions = json.map { |question| Question.new(question) }
+          #puts "#{questions}"
+          #block.call(questions)
+          json = BW::JSON.parse(response.body.to_s)
+          block.call(json)
+      
         elsif response.status_code.to_s =~ /40\d/
           alert = UIAlertView.alloc.initWithTitle("Not authorized",
                                                   message: "Not authorized",

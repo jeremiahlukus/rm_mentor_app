@@ -10,6 +10,8 @@ require 'motion/project/template/ios'
 
 begin
   require 'bundler'
+  require 'afmotion'
+  require 'bubble-wrap'
   Bundler.require
 rescue LoadError
 end
@@ -27,7 +29,6 @@ Motion::Project::App.setup do |app|
   app.version = '1.0'
   app.pods do
     pod 'AFNetworking'
-    pod 'SVProgressHUD'
   end
 
   # ===========================================================================================
