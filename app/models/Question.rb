@@ -2,7 +2,7 @@ class Question
   API_questions_ENDPOINT = "https://rails-mentor-api.herokuapp.com/questions"
 
   
-  PROPERTIES = [:body,:id, :title,:user_id, :completed, :recipient_id] 
+  PROPERTIES = [:body,:id, :title,:correct] 
 
   PROPERTIES.each do |prop|
     attr_accessor prop

@@ -1,31 +1,44 @@
 class QuestionController < UIViewController
 
+  attr_accessor :questions 
+
   def viewDidLoad
     self.view = UIView.alloc.init
     self.view.backgroundColor = UIColor.whiteColor
     self.view.userInteractionEnabled = true
     navigationItem.title = 'Ruby Quiz'
     self.view.backgroundColor = UIColor.blueColor
+     @questions = [ {'body' => "Some ruby question.", 'id' => "30", 'title' => "Ruby1", 'correct' => 'True' },
+                   { 'body' => "Another Ruby question",'id' => "31", 'title' => "Ruby2", 'correct' => 'True' },
+                   {'body' => "last Ruby question", 'id' => "32", 'title' => "Ruby3", 'correct' => 'False' },]
+
 
     # make these the questions on the server @questions = Question.all?
     # json response is
     #
     # [#<Question:0x6040000ac000 @body="This is question one" @id=1 @title="Question 1">, 
-    # #<Question:0x6040000ac300 @body="This is question two" @id=2 @title="Question 2">, 
-    # #<Question:0x6040000ac540 @body="This is question three" @id=3 @title="Question 3">]
-    # 
-    
-    @questions = [ { 'title' => "Ruby1", 'body' => "Some ruby question.", 'correct' => 'True' },
-                   { 'title' => "Ruby2", 'body' => "Another Ruby question", 'correct' => 'True' },
-                   { 'title' => "Ruby3", 'body' => "last Ruby question", 'correct' => 'False' },]
+     # #<Question:0x6040000ac300 @body="This is question two" @id=2 @title="Question 2">, 
+     # #<Question:0x6040000ac540 @body="This is question three" @id=3 @title="Question 3">]
+     # 
+     # 
+     Question.all do |question|
+       id = question[:id].to_s
+       body = question[:body].to_s 
+       title = question[:title].to_s 
+       correct = question[:correct].to_s 
+       tmp = { 'body' => "#{body}", 'id' => "#{id}", 
+               'title' => "#{title}", 'correct' => "#{correct}" }
+       @questions << tmp
+     end
 
-    screen_setup
+
+     screen_setup
   end
 
 
   def screen_setup
-    @total = 3 
-                                                                                                                         
+    @total = 6 
+
     @question_title = UILabel.new
     @question_title.font = UIFont.systemFontOfSize(24)
     @question_title.backgroundColor = UIColor.clearColor
@@ -36,7 +49,7 @@ class QuestionController < UIViewController
     @question_title.frame = [[40,50], [343, 79]]
     view.addSubview @question_title
 
-     @question_label = UILabel.new
+    @question_label = UILabel.new
     @question_label.font = UIFont.systemFontOfSize(24)
     @question_label.backgroundColor = UIColor.clearColor
     @question_label.font = UIFont.fontWithName("Helvetica", size:20)
@@ -68,7 +81,7 @@ class QuestionController < UIViewController
     @result_label.textAlignment = UITextAlignmentCenter
     @result_label.frame = [110, 195], [155, 56]
     view.addSubview @result_label
-                                                                                                                         
+
     @score_label = UILabel.new
     @score_label.font = UIFont.systemFontOfSize(30)
     @score_label.backgroundColor = UIColor.clearColor
@@ -81,7 +94,7 @@ class QuestionController < UIViewController
     get_question
   end
 
-private
+  private
   def show_answer(sender)
     correct = @questions[@index]['correct'] == 'True' ? 0 : 1 
     if sender.tag == correct
@@ -93,11 +106,11 @@ private
       @result_label.textColor = UIColor.redColor 
     end
 
-    @score_label.text = "#{@score}/3"
+    @score_label.text = "#{@score}/6"
 
-    if @index == 2
+    if @index == @total
       show_alert('Finished', "Yor are now being redirected back to feedback", 'OK')
-      show_alert('Quiz Complete', "Your final score was #{@score}/3", 'OK')
+      show_alert('Quiz Complete', "Your final score was #{@score}/6", 'OK')
       feedbackController
     else
       get_question
