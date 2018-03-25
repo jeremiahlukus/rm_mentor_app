@@ -11,6 +11,7 @@ class QuestionController < UIViewController
                    { 'body' => "Another Ruby question",'id' => "31", 'title' => "Ruby2", 'correct' => 'True' },
                    {'body' => "last Ruby question", 'id' => "32", 'title' => "Ruby3", 'correct' => 'False' },]
 
+ #    @questions = []
 
     # make these the questions on the server @questions = Question.all?
     # json response is
@@ -167,7 +168,7 @@ class QuestionController < UIViewController
     @questions = @questions.shuffle
     @score = 0
     @index = -1
-    @score_label.text = "0/3"
+    @score_label.text = "0/#{@questions.count}"
     @result_label.text = ""
     @result_label.textColor = UIColor.blackColor 
   end
