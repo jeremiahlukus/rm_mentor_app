@@ -10,7 +10,7 @@ class WelcomeController < UIViewController
     self.title = "Welcome"
     self.view.backgroundColor = UIColor.whiteColor
 
-    @containerView = UIView.alloc.initWithFrame([[0, 50], [self.view.frame.size.width, 100]])
+    @containerView = UIView.alloc.initWithFrame([[50, 50], [self.view.frame.size.width, 100]])
 
     @welcomeTitleLabel = UILabel.alloc.initWithFrame([[10, 10], [self.view.frame.size.width - 20, 20]])
     @welcomeTitleLabel.font = UIFont.boldSystemFontOfSize(20)

@@ -7,12 +7,9 @@ class FeedbackController < UIViewController
 
   def viewDidLoad
     super
-
     self.feedbacks = []
-
     self.title = "Feedbacks"
     self.view.backgroundColor = UIColor.whiteColor
-
     make_nav 
     @feedbacksTableView = UITableView.alloc.initWithFrame([[0, 0],
                                                       [self.view.bounds.size.width, self.view.bounds.size.height]],
@@ -22,7 +19,6 @@ class FeedbackController < UIViewController
     @feedbacksTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
     self.view.addSubview(@feedbacksTableView)
     refresh if App::Persistence['authToken']
-
   end
 
   def make_nav 
