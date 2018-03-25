@@ -13,42 +13,28 @@ class FeedbackController < UIViewController
     self.title = "Feedbacks"
     self.view.backgroundColor = UIColor.whiteColor
 
-    logoutButton = UIBarButtonItem.alloc.initWithTitle("Logout",
-                                                       style:UIBarButtonItemStylePlain,
-                                                       target:self,
-                                                       action:'logout')
-    self.navigationItem.leftBarButtonItem = logoutButton
-
-    refreshButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemRefresh,
-                                                                      target:self,
-                                                                      action:'refresh')
-    newFeedbackButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd,
-                                                                      target:self,
-                                                                      action:'addNewFeedback')
-
-     questionButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemPlay,
-                                                                      target:self,
-                                                                      action:'questionController')
-
-
-
-  
-    self.navigationItem.rightBarButtonItems = [questionButton, refreshButton, newFeedbackButton]
-
-
+    make_nav 
     @feedbacksTableView = UITableView.alloc.initWithFrame([[0, 0],
                                                       [self.view.bounds.size.width, self.view.bounds.size.height]],
                                                       style:UITableViewStylePlain)
     @feedbacksTableView.dataSource = self
     @feedbacksTableView.delegate = self
     @feedbacksTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
-
     self.view.addSubview(@feedbacksTableView)
-
- 
-
     refresh if App::Persistence['authToken']
+
   end
+
+  def make_nav 
+    logoutButton = UIBarButtonItem.alloc.initWithTitle("Logout", style:UIBarButtonItemStylePlain, target:self, action:'logout')
+    self.navigationItem.leftBarButtonItem = logoutButton
+    refreshButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemRefresh, target:self, action:'refresh')
+    newFeedbackButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd,target:self,action:'addNewFeedback')
+    questionButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemPlay,target:self,action:'questionController')
+    cameraButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemCamera,target:self,action:'cameraController')
+    self.navigationItem.rightBarButtonItems = [questionButton, refreshButton, newFeedbackButton, cameraButton]
+  end
+
 
   # UITableView delegate methods
   def tableView(tableView, numberOfRowsInSection:section)
@@ -99,8 +85,13 @@ class FeedbackController < UIViewController
   end
 
   def questionController
-   view_b = QuestionController.alloc.init
-    self.presentViewController view_b, animated:true, completion:nil
+    question_view = QuestionController.alloc.init
+    self.presentViewController question_view, animated:true, completion:nil
+  end
+
+  def cameraController
+    camera_view = CameraController.alloc.init
+    self.presentViewController camera_view, animated:true, completion:nil
   end
 
 

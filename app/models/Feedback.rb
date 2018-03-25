@@ -34,7 +34,7 @@ class Feedback
           puts "#{feedbacks}"
           block.call(feedbacks)
         elsif response.status_code.to_s =~ /40\d/
-          alert = UIAlertView.alloc.initWithTitle("Not authorized",
+          alert = UIAlertView.alloc.initWithTitle("All Not authorized",
                                                   message: "Not authorized",
                                                   delegate: nil,
                                                   cancelButtonTitle: "OK",
@@ -87,8 +87,12 @@ class Feedback
   end
 
   def toggle_completed(&block)
-    url = "#{API_FEEDBACKS_ENDPOINT}/#{self.id}/#{self.completed ? 'open' : 'complete'}.json"
-    BW::HTTP.put(url, { headers: Feedback.headers }) do |response|
+    
+    url = "#{API_FEEDBACKS_ENDPOINT}/#{self.id}/#{self.completed ? 'open' : 'complete'}"
+    puts url 
+    puts self
+    puts self.id
+    BW::HTTP.get(url, { headers: Feedback.headers }) do |response|
       if response.status_description.nil?
         alert = UIAlertView.alloc.initWithTitle("Error",
                                                 message: response.error_message,
@@ -98,12 +102,11 @@ class Feedback
         alert.show
       else
         if response.ok?
-          json = BW::JSON.parse(response.body.to_s)
-          feedbackData = json[:data][:feedback]
-          feedback = Feedback.new(feedbackData)
-          block.call(feedback)
+          puts "Response OK and visited #{url}"
         elsif response.status_code.to_s =~ /40\d/
-          alert = UIAlertView.alloc.initWithTitle("Not authorized",
+          puts response 
+
+          alert = UIAlertView.alloc.initWithTitle("Toggle Not authorized",
                                                   message: "Not authorized",
                                                   delegate: nil,
                                                   cancelButtonTitle: "OK",

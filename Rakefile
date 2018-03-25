@@ -55,8 +55,10 @@ Motion::Project::App.setup do |app|
   app.device_family = [:iphone, :ipad]
   app.interface_orientations = [:portrait]
   app.info_plist['UIRequiresFullScreen'] = true
+  app.info_plist['NSCameraUsageDescription'] = 'This app uses camera'
+  app.info_plist['NSPhotoLibraryUsageDescription'] = 'This app uses Photo Library'
   app.info_plist['ITSAppUsesNonExemptEncryption'] = false
-   app.info_plist["NSAppTransportSecurity"] = { "NSAllowsArbitraryLoads" => true }
+  app.info_plist["NSAppTransportSecurity"] = { "NSAllowsArbitraryLoads" => true }
 
   # ===========================================================================================
   # 6. To deploy to an actual device, you will need to create a developer certificate at:

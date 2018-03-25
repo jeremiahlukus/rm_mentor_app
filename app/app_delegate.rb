@@ -4,8 +4,7 @@ class AppDelegate
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
     @navigationController = UINavigationController.alloc.init
-    @navigationController.pushViewController(FeedbackController.controller,
-                                             animated:false)
+    @navigationController.pushViewController(FeedbackController.controller, animated:false)
 
     @window.rootViewController = @navigationController
     @window.makeKeyAndVisible

@@ -4,7 +4,6 @@ class QuestionController < UIViewController
 
   def viewDidLoad
     self.view = UIView.alloc.init
-    self.view.backgroundColor = UIColor.whiteColor
     self.view.userInteractionEnabled = true
     navigationItem.title = 'Ruby Quiz'
     self.view.backgroundColor = UIColor.blueColor
@@ -21,23 +20,47 @@ class QuestionController < UIViewController
      # #<Question:0x6040000ac540 @body="This is question three" @id=3 @title="Question 3">]
      # 
      # 
-     Question.all do |question|
-       id = question[:id].to_s
-       body = question[:body].to_s 
-       title = question[:title].to_s 
-       correct = question[:correct].to_s 
-       tmp = { 'body' => "#{body}", 'id' => "#{id}", 
-               'title' => "#{title}", 'correct' => "#{correct}" }
-       @questions << tmp
-     end
+     #@questions = []
+     # Question.all do |questions|
+     #  update_ui_with_questions(questions) 
+     # end
 
+     
+#     @questions <<  {'body' => "#{$allQuestions[0].body}", 'id' => "32", 'title' => "#{$allQuestions[0].title}", 'correct' => 'False' }
+     # $allQuestions.all do |question|
+     #   index = 0
+     #   tmpQuestion = question[index] 
+     #   tmp = { 'body' => "#{tmpQuestion.body}", 'id' => "#{tmpQuestion.id}", 'title' => "#{tmpQuestion.title}", 'correct' => "#{tmpQuestion.correct}"}
+     #   @questions << tmp
+     #   index += 1
 
-     screen_setup
+     # end
+     load_questions
   end
 
+  def load_questions
+    Question.all do |questions|
+      display_questions(questions)
+    end
+  end 
+  $count = 0
+
+  def display_questions(questions)
+    questions.each do |question|
+      if $count != questions.count  
+        @questions <<  {'body' => "#{questions[$count].body}", 'id' => "32", 'title' => "#{questions[$count].title}", 'correct' => 'False' }
+        puts @questions
+        $count += 1
+        puts $count
+      end 
+    end
+
+     screen_setup
+    # @questions <<  {'body' => "#{questions[1].body}", 'id' => "32", 'title' => "#{questions[1].title}", 'correct' => 'False' }
+  end
 
   def screen_setup
-    @total = 6 
+    @total = @questions.count 
 
     @question_title = UILabel.new
     @question_title.font = UIFont.systemFontOfSize(24)
@@ -106,7 +129,7 @@ class QuestionController < UIViewController
       @result_label.textColor = UIColor.redColor 
     end
 
-    @score_label.text = "#{@score}/6"
+    @score_label.text = "#{@score}/#{@total}"
 
     if @index == @total
       show_alert('Finished', "Yor are now being redirected back to feedback", 'OK')
@@ -116,20 +139,25 @@ class QuestionController < UIViewController
       get_question
     end
   end
+
   def feedbackController 
-    view_b = FeedbackController.alloc.init
-    self.presentViewController view_b, animated:true, completion:nil
+    feedback_view  = FeedbackController.alloc.initWithNibName(nil, bundle: nil)
+    self.presentViewController feedback_view, animated:true, completion:nil
   end
 
 
   def get_question
     @index +=1
-    @question_title.text = @questions[@index]['title']
+    if @index >= (@questions.count - 1)
+      show_alert('Finished', "Yor are now being redirected back to feedback", 'OK')
+      show_alert('Quiz Complete', "Your final score was #{@score}/6", 'OK')
+      feedbackController
+    end
+
     @question_title.text = @questions[@index]['title']
     @question_title.frame = [[50,60 ], [343, 79]]
     @question_title.sizeToFit
 
-    @question_label.text = @questions[@index]['body']
     @question_label.text = @questions[@index]['body']
     @question_label.frame = [[50, 142], [359, 213]]
     @question_label.sizeToFit
