@@ -16,7 +16,10 @@ class FeedbackController < UIViewController
                                                       style:UITableViewStylePlain)
     @feedbacksTableView.dataSource = self
     @feedbacksTableView.delegate = self
-    @feedbacksTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
+    @feedbacksTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight 
+
+    puts "\nHey in view did load\n"
+
     self.view.addSubview(@feedbacksTableView)
     refresh if App::Persistence['authToken']
   end
@@ -61,9 +64,12 @@ class FeedbackController < UIViewController
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
-    tableView.deselectRowAtIndexPath(indexPath, animated:true)
-    feedback = self.feedbacks[indexPath.row]
+    # tableView.deselectRowAtIndexPath(indexPath, animated:true)
+     feedback = self.feedbacks[indexPath.row]
 
+
+    feedbackDetailController = FeedbackDetailController.alloc.initWithFeedbackDetails(self.feedbacks[indexPath.row])
+     self.navigationController.pushViewController(feedbackDetailController, animated:true) 
     feedback.toggle_completed do
       refresh
     end

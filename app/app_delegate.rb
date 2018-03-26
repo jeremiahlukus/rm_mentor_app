@@ -15,6 +15,22 @@ class AppDelegate
 
     return true
   end
+  def refresh_view 
+    @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+
+    @navigationController = UINavigationController.alloc.init
+    @navigationController.pushViewController(FeedbackController.controller, animated:false)
+
+    @window.rootViewController = @navigationController
+    @window.makeKeyAndVisible
+
+    if App::Persistence['authToken'].nil?
+      showWelcomeController
+    end
+
+    return true
+  end
+ 
 
   def showWelcomeController
     @welcomeController = WelcomeController.alloc.init
@@ -30,7 +46,7 @@ class AppDelegate
       'Authorization' => "Token token=\"#{App::Persistence['authToken']}\""
     }
 
-    BW::HTTP.delete("http://localhost:3000/sessions.json", { headers: headers }) do |response|
+    BW::HTTP.delete("https://rails-mentor-api.herokuapp.com/sessions.json", { headers: headers }) do |response|
       App::Persistence['authToken'] = nil
       showWelcomeController
     end

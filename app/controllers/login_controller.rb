@@ -1,5 +1,5 @@
 class LoginController < PM::XLFormScreen 
-  API_LOGIN_ENDPOINT = "http://localhost:3000/sessions.json"
+  API_LOGIN_ENDPOINT = "https://rails-mentor-api.herokuapp.com/sessions.json"
 
   form_options on_save: :login
 

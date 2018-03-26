@@ -1,7 +1,7 @@
 class Feedback
   API_FEEDBACKS_ENDPOINT = "https://rails-mentor-api.herokuapp.com/feedbacks"
 
-  
+
   PROPERTIES = [:body,:id, :title,:user_id, :completed, :recipient_id] 
 
   PROPERTIES.each do |prop|
@@ -87,7 +87,7 @@ class Feedback
   end
 
   def toggle_completed(&block)
-    
+
     url = "#{API_FEEDBACKS_ENDPOINT}/#{self.id}/#{self.completed ? 'open' : 'complete'}"
     puts url 
     puts self

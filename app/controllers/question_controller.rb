@@ -11,6 +11,7 @@ class QuestionController < UIViewController
                    { 'body' => "Another Ruby question",'id' => "31", 'title' => "Ruby2", 'correct' => 'True' },
                    {'body' => "last Ruby question", 'id' => "32", 'title' => "Ruby3", 'correct' => 'False' },]
 
+     @index = -1
  #    @questions = []
 
     # make these the questions on the server @questions = Question.all?
@@ -39,6 +40,16 @@ class QuestionController < UIViewController
      load_questions
   end
 
+  def refreshLoad
+    self.view = UIView.alloc.init
+    self.view.userInteractionEnabled = true
+    navigationItem.title = 'Ruby Quiz'
+    self.view.backgroundColor = UIColor.blueColor
+    @index = -1
+     load_questions
+  end
+
+ 
   def load_questions
     Question.all do |questions|
       display_questions(questions)
@@ -47,9 +58,14 @@ class QuestionController < UIViewController
   $count = 0
 
   def display_questions(questions)
+     @questions = [ {'body' => "Some ruby question.", 'id' => "30", 'title' => "Ruby1", 'correct' => 'True' },
+                   { 'body' => "Another Ruby question",'id' => "31", 'title' => "Ruby2", 'correct' => 'True' },
+                   {'body' => "last Ruby question", 'id' => "32", 'title' => "Ruby3", 'correct' => 'False' },]
+
+ 
     questions.each do |question|
       if $count != questions.count  
-        @questions <<  {'body' => "#{questions[$count].body}", 'id' => "32", 'title' => "#{questions[$count].title}", 'correct' => 'False' }
+        @questions <<  {'body' => "#{questions[$count].body}", 'id' => "#{questions[$count].id}", 'title' => "#{questions[$count].title}", 'correct' => 'False' }
         puts @questions
         $count += 1
         puts $count
@@ -57,10 +73,10 @@ class QuestionController < UIViewController
     end
 
      screen_setup
-    # @questions <<  {'body' => "#{questions[1].body}", 'id' => "32", 'title' => "#{questions[1].title}", 'correct' => 'False' }
   end
 
   def screen_setup
+    @questions <<  {'body' => " '", 'id' => "33", 'title' => " '", 'correct' => 'False' }
     @total = @questions.count 
 
     @question_title = UILabel.new
@@ -115,6 +131,10 @@ class QuestionController < UIViewController
 
     reset_quiz
 
+    if @questions.count == 4
+      puts "Count == 4"
+    end
+
     get_question
   end
 
@@ -130,11 +150,12 @@ class QuestionController < UIViewController
       @result_label.textColor = UIColor.redColor 
     end
 
-    @score_label.text = "#{@score}/#{@total}"
+    @score_label.text = "#{@score}/#{@total - 1}"
 
     if @index == @total
+      @index = -1
       show_alert('Finished', "Yor are now being redirected back to feedback", 'OK')
-      show_alert('Quiz Complete', "Your final score was #{@score}/6", 'OK')
+      show_alert('Quiz Complete', "Your final score was #{@score}/#{@questions.count - 1 }", 'OK')
       feedbackController
     else
       get_question
@@ -142,8 +163,7 @@ class QuestionController < UIViewController
   end
 
   def feedbackController 
-    feedback_view  = FeedbackController.alloc.initWithNibName(nil, bundle: nil)
-    self.presentViewController feedback_view, animated:true, completion:nil
+    UIApplication.sharedApplication.delegate.refresh_view
   end
 
 
@@ -151,24 +171,30 @@ class QuestionController < UIViewController
     @index +=1
     if @index >= (@questions.count - 1)
       show_alert('Finished', "Yor are now being redirected back to feedback", 'OK')
-      show_alert('Quiz Complete', "Your final score was #{@score}/6", 'OK')
+      show_alert('Quiz Complete', "Your final score was #{@score}/#{@questions.count - 1}", 'OK')
       feedbackController
     end
 
-    @question_title.text = @questions[@index]['title']
-    @question_title.frame = [[50,60 ], [343, 79]]
-    @question_title.sizeToFit
+    if @questions.count == 0 
+      puts "In if statement"
+      refreshLoad
+    else 
 
-    @question_label.text = @questions[@index]['body']
-    @question_label.frame = [[50, 142], [359, 213]]
-    @question_label.sizeToFit
+      @question_title.text = @questions[@index]['title']
+      @question_title.frame = [[50,60 ], [343, 79]]
+      @question_title.sizeToFit
+
+      @question_label.text = @questions[@index]['body']
+      @question_label.frame = [[50, 142], [359, 213]]
+      @question_label.sizeToFit
+    end
   end
 
   def reset_quiz
-    @questions = @questions.shuffle
+    #@questions = @questions.shuffle
     @score = 0
     @index = -1
-    @score_label.text = "0/#{@questions.count}"
+    @score_label.text = "0/#{@questions.count - 1}"
     @result_label.text = ""
     @result_label.textColor = UIColor.blackColor 
   end

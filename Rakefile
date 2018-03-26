@@ -45,6 +45,7 @@ Motion::Project::App.setup do |app|
   #    Developer program to get access to this screen (there is an annual fee of $99).
   # ===========================================================================================
   # app.identifier = ''
+  app.identifier = "com.jparrack.rm_mentor_app"
 
   # ===========================================================================================
   # 5. If you need to reference any additional iOS libraries, use the config array below.
@@ -66,7 +67,7 @@ Motion::Project::App.setup do |app|
   #    The name of the certificate will be accessible via Keychain Access. Set the value you
   #    see there below.
   # ===========================================================================================
-  # app.codesign_certificate = ''
+  app.codesign_certificate = 'iPhone Developer: jeremiahlukus@hotmail.com (8423M85WJL)'
 
   # ===========================================================================================
   # 7. To deploy to an actual device, you will need to create a provisioning profile. First:
@@ -78,8 +79,20 @@ Motion::Project::App.setup do |app|
   #
   #    Download the profile and set the path to the download location below.
   # ===========================================================================================
-  # app.provisioning_profile = ''
 
+  app.provisioning_profile = '~/Library/MobileDevice/ProvisioningProfiles/508610b8-b621-444f-a6c1-7ac53fec3d4c.mobileprovision'
+
+  # app.development do
+  #   app.codesign_certificate = MotionProvisioning.certificate(
+  #     type: :development,
+  #     platform: :ios)
+
+  #   app.provisioning_profile = MotionProvisioning.profile(
+  #     bundle_identifier: app.identifier,
+  #     app_name: app.name,
+  #     platform: :ios,
+  #     type: :development)
+  # end
   # ===========================================================================================
   # 8. Similar to Step 7. Production, create a production certificate at:
   #    https://developer.apple.com/account/ios/certificate/distribution.
@@ -94,7 +107,7 @@ Motion::Project::App.setup do |app|
   # 9. If you want to create a beta build. Uncomment the line below and set your profile to
   #    point to your production provisions (Step 8).
   # ===========================================================================================
-  # app.entitlements['beta-reports-active'] = true
+   app.entitlements['beta-reports-active'] = true
 end
 
 def define_icon_defaults!(app)

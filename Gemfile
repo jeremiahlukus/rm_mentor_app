@@ -11,3 +11,4 @@ gem 'ProMotion-XLForm'
 gem 'afmotion'
 gem "bubble-wrap-http"
 gem 'ruby_motion_query', github: 'infinitered/rmq'
+gem 'motion-provisioning'

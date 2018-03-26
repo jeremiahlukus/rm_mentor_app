@@ -1,5 +1,5 @@
 class RegisterController < PM::XLFormScreen  
-  API_REGISTER_ENDPOINT = "http://localhost:3000/registrations.json"
+  API_REGISTER_ENDPOINT = "https://rails-mentor-api.herokuapp.com/registrations.json"
 
 
 form_options on_save: :register 
