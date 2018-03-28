@@ -23,7 +23,7 @@ Motion::Project::App.setup do |app|
   # ===========================================================================================
   # 2. Set your app name (this is what will show up under the icon when your app is installed).
   # ===========================================================================================
-  app.name = 'rm_mentor_app'
+  app.name = 'rmMentorApp'
 
   # version for your app
   app.version = '1.0'
@@ -45,7 +45,7 @@ Motion::Project::App.setup do |app|
   #    Developer program to get access to this screen (there is an annual fee of $99).
   # ===========================================================================================
   # app.identifier = ''
-  app.identifier = "com.jparrack.rm_mentor_app"
+  app.identifier = "com.jparrack.rmMentorApp"
 
   # ===========================================================================================
   # 5. If you need to reference any additional iOS libraries, use the config array below.
@@ -67,7 +67,7 @@ Motion::Project::App.setup do |app|
   #    The name of the certificate will be accessible via Keychain Access. Set the value you
   #    see there below.
   # ===========================================================================================
-  app.codesign_certificate = 'iPhone Developer: jeremiahlukus@hotmail.com (8423M85WJL)'
+#  app.codesign_certificate = 'iPhone Developer: jeremiahlukus@hotmail.com (8423M85WJL)'
 
   # ===========================================================================================
   # 7. To deploy to an actual device, you will need to create a provisioning profile. First:
@@ -80,52 +80,64 @@ Motion::Project::App.setup do |app|
   #    Download the profile and set the path to the download location below.
   # ===========================================================================================
 
-  app.provisioning_profile = '~/Library/MobileDevice/ProvisioningProfiles/508610b8-b621-444f-a6c1-7ac53fec3d4c.mobileprovision'
+  app.development do
+    app.codesign_certificate = MotionProvisioning.certificate(
+      type: :development,
+      platform: :ios)
 
-  # app.development do
-  #   app.codesign_certificate = MotionProvisioning.certificate(
-  #     type: :development,
-  #     platform: :ios)
+    app.provisioning_profile = MotionProvisioning.profile(
+      bundle_identifier: app.identifier,
+      app_name: app.name,
+      platform: :ios,
+      type: :development)
+  end
 
-  #   app.provisioning_profile = MotionProvisioning.profile(
-  #     bundle_identifier: app.identifier,
-  #     app_name: app.name,
-  #     platform: :ios,
-  #     type: :development)
-  # end
-  # ===========================================================================================
-  # 8. Similar to Step 7. Production, create a production certificate at:
-  #    https://developer.apple.com/account/ios/certificate/distribution.
-  #    These values will need to be set to before you can deploy to the App Store. Compile
-  #    using `rake clean archive:distribution` and upload the .ipa under ./build using
-  #    Application Loader.
-  # ===========================================================================================
-  # app.codesign_certificate = ''
-  # app.provisioning_profile = ''
+    # app.provisioning_profile = '~/Library/MobileDevice/ProvisioningProfiles/508610b8-b621-444f-a6c1-7ac53fec3d4c.mobileprovision'
 
-  # ===========================================================================================
-  # 9. If you want to create a beta build. Uncomment the line below and set your profile to
-  #    point to your production provisions (Step 8).
-  # ===========================================================================================
-   app.entitlements['beta-reports-active'] = true
-end
+    # app.development do
+    #   app.codesign_certificate = MotionProvisioning.certificate(
+    #     type: :development,
+    #     platform: :ios)
 
-def define_icon_defaults!(app)
-  # This is required as of iOS 11.0 (you must use asset catalogs to
-  # define icons or your app will be rejected. More information in
-  # located in the readme.
+    #   app.provisioning_profile = MotionProvisioning.profile(
+    #     bundle_identifier: app.identifier,
+    #     app_name: app.name,
+    #     platform: :ios,
+    #     type: :development)
+    # end
+    # ===========================================================================================
+    # 8. Similar to Step 7. Production, create a production certificate at:
+    #    https://developer.apple.com/account/ios/certificate/distribution.
+    #    These values will need to be set to before you can deploy to the App Store. Compile
+    #    using `rake clean archive:distribution` and upload the .ipa under ./build using
+    #    Application Loader.
+    # ===========================================================================================
+    # app.codesign_certificate = ''
+    # app.provisioning_profile = ''
 
-  app.info_plist['CFBundleIcons'] = {
-    'CFBundlePrimaryIcon' => {
-      'CFBundleIconName' => 'AppIcon',
-      'CFBundleIconFiles' => ['AppIcon60x60']
+    # ===========================================================================================
+    # 9. If you want to create a beta build. Uncomment the line below and set your profile to
+    #    point to your production provisions (Step 8).
+    # ===========================================================================================
+    app.entitlements['beta-reports-active'] = true
+  end
+
+  def define_icon_defaults!(app)
+    # This is required as of iOS 11.0 (you must use asset catalogs to
+    # define icons or your app will be rejected. More information in
+    # located in the readme.
+
+    app.info_plist['CFBundleIcons'] = {
+      'CFBundlePrimaryIcon' => {
+        'CFBundleIconName' => 'AppIcon',
+        'CFBundleIconFiles' => ['AppIcon60x60']
+      }
     }
-  }
 
-  app.info_plist['CFBundleIcons~ipad'] = {
-    'CFBundlePrimaryIcon' => {
-      'CFBundleIconName' => 'AppIcon',
-      'CFBundleIconFiles' => ['AppIcon60x60', 'AppIcon76x76']
+    app.info_plist['CFBundleIcons~ipad'] = {
+      'CFBundlePrimaryIcon' => {
+        'CFBundleIconName' => 'AppIcon',
+        'CFBundleIconFiles' => ['AppIcon60x60', 'AppIcon76x76']
+      }
     }
-  }
-end
+  end
