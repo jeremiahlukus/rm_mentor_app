@@ -36,7 +36,7 @@ Motion::Project::App.setup do |app|
   #    If you're using RubyMotion Starter Edition. You cannot set this value (the latest
   #    version of iOS will be used).
   # ===========================================================================================
-  # app.deployment_target = '10.0'
+  app.deployment_target = '10.0'
 
   # ===========================================================================================
   # 4. Your app identifier is needed to deploy to an actual device. You do not need to set this
@@ -80,17 +80,21 @@ Motion::Project::App.setup do |app|
   #    Download the profile and set the path to the download location below.
   # ===========================================================================================
 
-  app.development do
-    app.codesign_certificate = MotionProvisioning.certificate(
-      type: :development,
-      platform: :ios)
+  app.identifier = 'com.jparrack.rmMentorApp'
+  app.codesign_certificate = 'iPhone Developer: Jeremiah Parrack'
+  app.provisioning_profile = '~/Library/MobileDevice/ProvisioningProfiles/97396ca9-6bb1-4e64-8fba-9d38a03020b5.mobileprovision'
 
-    app.provisioning_profile = MotionProvisioning.profile(
-      bundle_identifier: app.identifier,
-      app_name: app.name,
-      platform: :ios,
-      type: :development)
-  end
+  # app.development do
+  #   app.codesign_certificate = MotionProvisioning.certificate(
+  #     type: :development,
+  #     platform: :ios)
+
+  #   app.provisioning_profile = MotionProvisioning.profile(
+  #     bundle_identifier: app.identifier,
+  #     app_name: app.name,
+  #     platform: :ios,
+  #     type: :development)
+  # end
 
     # app.provisioning_profile = '~/Library/MobileDevice/ProvisioningProfiles/508610b8-b621-444f-a6c1-7ac53fec3d4c.mobileprovision'
 
@@ -119,7 +123,7 @@ Motion::Project::App.setup do |app|
     # 9. If you want to create a beta build. Uncomment the line below and set your profile to
     #    point to your production provisions (Step 8).
     # ===========================================================================================
-    app.entitlements['beta-reports-active'] = true
+   # app.entitlements['beta-reports-active'] = true
   end
 
   def define_icon_defaults!(app)

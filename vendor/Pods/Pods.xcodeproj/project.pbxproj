@@ -1208,28 +1208,6 @@
 			};
 			name = Debug;
 		};
-		454F43646E70844A70CB62949FAF67EA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27D92FBB96CF2D98A1271C2A75C406A2 /* XLForm.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/XLForm/XLForm-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		4FCD67FB4BB7B66C9E20180AE2EEEE0A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FB3A75F510D8B659382B423CCD9A6B43 /* RSColorPicker.xcconfig */;
@@ -1251,6 +1229,27 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		503D02FBB9DDC3EB164642D9DC1B211B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27D92FBB96CF2D98A1271C2A75C406A2 /* XLForm.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/XLForm/XLForm-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		A2671ECBD8095CD62F08E3219186E1F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1331,7 +1330,7 @@
 			};
 			name = Release;
 		};
-		EB5F8BD62AB80D66E492609AE19E1358 /* Debug */ = {
+		E3437A420655A96B53F6710F67421363 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 27D92FBB96CF2D98A1271C2A75C406A2 /* XLForm.xcconfig */;
 			buildSettings = {
@@ -1340,7 +1339,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/XLForm/XLForm-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1349,8 +1348,9 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
 		F1BE9C9EA9B1F625E4505658354368A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1419,8 +1419,8 @@
 		84B71F5E895D9D119D62596AB9938306 /* Build configuration list for PBXNativeTarget "XLForm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EB5F8BD62AB80D66E492609AE19E1358 /* Debug */,
-				454F43646E70844A70CB62949FAF67EA /* Release */,
+				503D02FBB9DDC3EB164642D9DC1B211B /* Debug */,
+				E3437A420655A96B53F6710F67421363 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -29,6 +29,7 @@
 
 @interface XLFormImageCell() <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
+    UIPopoverController *popoverController;
     UIImagePickerController *imagePickerController;
     UIAlertController *alertController;
 }
@@ -89,10 +90,6 @@
                                                           }]];
     }
     
-    [alertController addAction:[UIAlertAction actionWithTitle: NSLocalizedString(@"Cancel", nil)
-                                                        style: UIAlertActionStyleCancel
-                                                      handler: nil]];
-
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         alertController.modalPresentationStyle = UIModalPresentationPopover;
         alertController.popoverPresentationController.sourceView = self.contentView;
@@ -112,15 +109,16 @@
     imagePickerController.sourceType = source;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        imagePickerController.modalPresentationStyle = UIModalPresentationPopover;
-        imagePickerController.popoverPresentationController.sourceRect = self.contentView.frame;
-        imagePickerController.popoverPresentationController.sourceView = self.formViewController.view;
-        imagePickerController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+        [popoverController presentPopoverFromRect: self.contentView.frame
+                                           inView: self.formViewController.view
+                         permittedArrowDirections: UIPopoverArrowDirectionAny
+                                         animated: YES];
+    } else {
+        [self.formViewController presentViewController: imagePickerController
+                                              animated: YES
+                                            completion: nil];
     }
-    
-    [self.formViewController presentViewController: imagePickerController
-                                          animated: YES
-                                        completion: nil];
 }
 
 #pragma mark -  UIImagePickerControllerDelegate
@@ -136,8 +134,8 @@
     }
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        if (self.formViewController.presentedViewController && self.formViewController.presentedViewController.modalPresentationStyle == UIModalPresentationPopover) {
-            [self.formViewController dismissViewControllerAnimated:YES completion:nil];
+        if (popoverController && popoverController.isPopoverVisible) {
+            [popoverController dismissPopoverAnimated: YES];
         }
     } else {
         [self.formViewController dismissViewControllerAnimated: YES completion: nil];

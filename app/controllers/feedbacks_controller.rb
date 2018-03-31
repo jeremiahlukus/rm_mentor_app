@@ -30,8 +30,9 @@ class FeedbackController < UIViewController
     refreshButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemRefresh, target:self, action:'refresh')
     newFeedbackButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd,target:self,action:'addNewFeedback')
     questionButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemPlay,target:self,action:'questionController')
+    requestButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemPlay,target:self,action:'requestController')
     cameraButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemCamera,target:self,action:'cameraController')
-    self.navigationItem.rightBarButtonItems = [questionButton, refreshButton, newFeedbackButton, cameraButton]
+    self.navigationItem.rightBarButtonItems = [questionButton, refreshButton, newFeedbackButton, cameraButton, requestButton]
   end
 
 
@@ -90,6 +91,12 @@ class FeedbackController < UIViewController
     question_view = QuestionController.alloc.init
     self.presentViewController question_view, animated:true, completion:nil
   end
+
+  def requestController
+    request_view = RequestController.alloc.init
+    self.presentViewController request_view, animated:true, completion:nil
+  end
+
 
   def cameraController
     camera_view = CameraController.alloc.init

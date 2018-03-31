@@ -33,7 +33,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame
 {
     if((self = [super initWithFrame:frame])){
         self.scrollsToTop = NO;

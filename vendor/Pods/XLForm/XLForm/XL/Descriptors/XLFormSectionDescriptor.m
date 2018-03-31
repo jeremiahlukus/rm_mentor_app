@@ -125,15 +125,7 @@
 
 -(void)addFormRow:(XLFormRowDescriptor *)formRow
 {
-    NSUInteger index;
-    
-    if ([self canInsertUsingButton]) {
-        index = ([self.formRows count] > 0) ? [self.formRows count] - 1 : 0;
-    } else {
-        index = [self.allRows count];
-    }
-
-    [self insertObject:formRow inAllRowsAtIndex:index];
+    [self insertObject:formRow inAllRowsAtIndex:([self canInsertUsingButton] ? MAX(0, [self.formRows count] - 1) : [self.allRows count])];
 }
 
 -(void)addFormRow:(XLFormRowDescriptor *)formRow afterRow:(XLFormRowDescriptor *)afterRow

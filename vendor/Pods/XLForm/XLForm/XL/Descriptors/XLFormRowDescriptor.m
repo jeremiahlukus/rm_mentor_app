@@ -28,9 +28,6 @@
 #import "XLFormRowDescriptor.h"
 #import "NSString+XLFormAdditions.h"
 
-CGFloat XLFormUnspecifiedCellHeight = -3.0;
-CGFloat XLFormRowInitialHeight = -2;
-
 @interface XLFormDescriptor (_XLFormRowDescriptor)
 
 @property (readonly) NSDictionary* allRowsByTag;
@@ -46,8 +43,6 @@ CGFloat XLFormRowInitialHeight = -2;
 -(void)hideFormRow:(XLFormRowDescriptor*)formRow;
 
 @end
-
-#import "NSObject+XLFormAdditions.h"
 
 @interface XLFormRowDescriptor() <NSCopying>
 
@@ -69,10 +64,8 @@ CGFloat XLFormRowInitialHeight = -2;
 @synthesize hidePredicateCache = _hidePredicateCache;
 @synthesize disablePredicateCache = _disablePredicateCache;
 @synthesize cellConfig = _cellConfig;
-@synthesize cellConfigForSelector = _cellConfigForSelector;
 @synthesize cellConfigIfDisabled = _cellConfigIfDisabled;
 @synthesize cellConfigAtConfigure = _cellConfigAtConfigure;
-@synthesize height = _height;
 
 -(instancetype)init
 {
@@ -98,7 +91,6 @@ CGFloat XLFormRowInitialHeight = -2;
         _disablePredicateCache = nil;
         _isDirtyHidePredicateCache = YES;
         _hidePredicateCache = nil;
-        _height = XLFormRowInitialHeight;
         [self addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:0];
         [self addObserver:self forKeyPath:@"disablePredicateCache" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:0];
         [self addObserver:self forKeyPath:@"hidePredicateCache" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:0];
@@ -166,14 +158,6 @@ CGFloat XLFormRowInitialHeight = -2;
     return _cellConfig;
 }
 
--(NSMutableDictionary *)cellConfigForSelector
-{
-    if (_cellConfigForSelector) return _cellConfigForSelector;
-    _cellConfigForSelector = [NSMutableDictionary dictionary];
-    return _cellConfigForSelector;
-}
-
-
 -(NSMutableDictionary *)cellConfigIfDisabled
 {
     if (_cellConfigIfDisabled) return _cellConfigIfDisabled;
@@ -186,41 +170,6 @@ CGFloat XLFormRowInitialHeight = -2;
     if (_cellConfigAtConfigure) return _cellConfigAtConfigure;
     _cellConfigAtConfigure = [NSMutableDictionary dictionary];
     return _cellConfigAtConfigure;
-}
-
--(NSString*)editTextValue
-{
-    if (self.value) {
-        if (self.valueFormatter) {
-            if (self.useValueFormatterDuringInput) {
-                return [self displayTextValue];
-            }else{
-                // have formatter, but we don't want to use it during editing
-                return [self.value displayText];
-            }
-        }else{
-            // have value, but no formatter, use the value's displayText
-            return [self.value displayText];
-        }
-    }else{
-        // placeholder
-        return @"";
-    }
-}
-
--(NSString*)displayTextValue
-{
-    if (self.value) {
-        if (self.valueFormatter) {
-            return [self.valueFormatter stringForObjectValue:self.value];
-        }
-        else{
-            return [self.value displayText];
-        }
-    }
-    else {
-        return self.noValueDisplayText;
-    }
 }
 
 -(NSString *)description
@@ -241,22 +190,6 @@ CGFloat XLFormRowInitialHeight = -2;
     _action = action;
 }
 
--(CGFloat)height
-{
-    if (_height == XLFormRowInitialHeight){
-        if ([[self.cell class] respondsToSelector:@selector(formDescriptorCellHeightForRowDescriptor:)]){
-            return [[self.cell class] formDescriptorCellHeightForRowDescriptor:self];
-        } else {
-            _height = XLFormUnspecifiedCellHeight;
-        }
-    }
-    return _height;
-}
-
--(void)setHeight:(CGFloat)height {
-    _height = height;
-}
-
 // In the implementation
 -(id)copyWithZone:(NSZone *)zone
 {
@@ -270,7 +203,6 @@ CGFloat XLFormRowInitialHeight = -2;
     rowDescriptorCopy.required = self.isRequired;
     rowDescriptorCopy.isDirtyDisablePredicateCache = YES;
     rowDescriptorCopy.isDirtyHidePredicateCache = YES;
-    rowDescriptorCopy.validators = [self.validators mutableCopy];
 
     // =====================
     // properties for Button
@@ -494,8 +426,7 @@ CGFloat XLFormRowInitialHeight = -2;
 
 - (BOOL)valueIsEmpty
 {
-    return self.value == nil || [self.value isKindOfClass:[NSNull class]] || ([self.value respondsToSelector:@selector(length)] && [self.value length]==0) ||
-    ([self.value respondsToSelector:@selector(count)] && [self.value count]==0);
+    return self.value == nil || [self.value isKindOfClass:[NSNull class]] || ([self.value respondsToSelector:@selector(length)] && [self.value length]==0);
 }
 
 -(XLFormValidationStatus *)doValidation
@@ -589,7 +520,7 @@ CGFloat XLFormRowInitialHeight = -2;
 }
 
 
--(instancetype)initWithLeftValue:(NSString *)leftValue httpParameterKey:(NSString *)httpParameterKey rightOptions:(NSArray *)rightOptions
+-(id)initWithLeftValue:(NSString *)leftValue httpParameterKey:(NSString *)httpParameterKey rightOptions:(NSArray *)rightOptions
 {
     self = [super init];
     if (self){

@@ -27,7 +27,6 @@
 #import <UIKit/UIKit.h>
 
 extern NSString *const XLFormTextFieldLengthPercentage;
-extern NSString *const XLFormTextFieldMaxNumberOfCharacters;
 
 @interface XLFormTextFieldCell : XLFormBaseCell <XLFormReturnKeyProtocol>
 
@@ -35,6 +34,5 @@ extern NSString *const XLFormTextFieldMaxNumberOfCharacters;
 @property (nonatomic, readonly) UITextField * textField;
 
 @property (nonatomic) NSNumber *textFieldLengthPercentage;
-@property (nonatomic) NSNumber *textFieldMaxNumberOfCharacters;
 
 @end
