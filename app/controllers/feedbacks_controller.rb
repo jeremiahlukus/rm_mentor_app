@@ -28,11 +28,11 @@ class FeedbackController < UIViewController
     logoutButton = UIBarButtonItem.alloc.initWithTitle("Logout", style:UIBarButtonItemStylePlain, target:self, action:'logout')
     self.navigationItem.leftBarButtonItem = logoutButton
     refreshButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemRefresh, target:self, action:'refresh')
-    newFeedbackButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd,target:self,action:'addNewFeedback')
+   # newFeedbackButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd,target:self,action:'addNewFeedback')
     questionButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemPlay,target:self,action:'questionController')
-    requestButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemPlay,target:self,action:'requestController')
+    requestButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd,target:self,action:'requestController')
     cameraButton = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemCamera,target:self,action:'cameraController')
-    self.navigationItem.rightBarButtonItems = [questionButton, refreshButton, newFeedbackButton, cameraButton, requestButton]
+    self.navigationItem.rightBarButtonItems = [questionButton, refreshButton, cameraButton, requestButton]
   end
 
 

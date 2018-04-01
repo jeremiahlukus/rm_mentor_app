@@ -2,7 +2,6 @@ class AppDelegate
 
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-
     @navigationController = UINavigationController.alloc.init
     @navigationController.pushViewController(FeedbackController.controller, animated:false)
 
@@ -15,6 +14,7 @@ class AppDelegate
 
     return true
   end
+
   def refresh_view 
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 

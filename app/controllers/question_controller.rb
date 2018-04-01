@@ -43,7 +43,7 @@ class QuestionController < UIViewController
   def refreshLoad
     self.view = UIView.alloc.init
     self.view.userInteractionEnabled = true
-    navigationItem.title = 'Ruby Quiz'
+    navigationItem.title = 'Programming Quiz'
     self.view.backgroundColor = UIColor.blueColor
     @index = -1
      load_questions
@@ -58,9 +58,11 @@ class QuestionController < UIViewController
   $count = 0
 
   def display_questions(questions)
-     @questions = [ {'body' => "Some ruby question.", 'id' => "30", 'title' => "Ruby1", 'correct' => 'True' },
-                   { 'body' => "Another Ruby question",'id' => "31", 'title' => "Ruby2", 'correct' => 'True' },
-                   {'body' => "last Ruby question", 'id' => "32", 'title' => "Ruby3", 'correct' => 'False' },]
+    @questions = [ {'body' => "The elsif conditional statement is written with an expression.", 'id' => "30", 'title' => "Ruby", 'correct' => 'True' },
+                   { 'body' => "The elsif statement can add many alternatives to if/else statements.",'id' => "31", 'title' => "Ruby", 'correct' => 'True' },
+                   {'body' => "While calling the fprintf() function in the format string conversion specifier %s can be used to write a character string in capital letters.", 'id' => "32", 'title' => "C", 'correct' => 'False' },
+                   {'body' => "A text stream is an ordered sequence of characters composed into lines, each line consisting of zero or more characters plus a terminating new-line character.", 'id' => "33", 'title' => "C", 'correct' => 'True' }, 
+    ]
 
  
     questions.each do |question|
