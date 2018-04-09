@@ -7,9 +7,10 @@ class FeedbackController < UIViewController
 
   def viewDidLoad
     super
+    self.view.styleId = 'feedbackView'
     self.feedbacks = []
     self.title = "Feedbacks"
-    self.view.backgroundColor = UIColor.whiteColor
+    #self.view.backgroundColor = UIColor.whiteColor
     make_nav 
     @feedbacksTableView = UITableView.alloc.initWithFrame([[0, 0],
                                                       [self.view.bounds.size.width, self.view.bounds.size.height]],
@@ -53,6 +54,7 @@ class FeedbackController < UIViewController
     cell.textLabel.text = feedback.title
     cell.detailTextLabel.text = feedback.body
 
+    cell.styleId = 'feedbackView'
     if feedback.completed
       cell.textLabel.color = '#aaaaaa'.to_color
       cell.accessoryType = UITableViewCellAccessoryCheckmark

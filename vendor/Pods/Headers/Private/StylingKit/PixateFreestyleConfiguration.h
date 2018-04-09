@@ -1,0 +1,1 @@
+../../../StylingKit/Pod/Classes/freestyle/src/Core/PixateFreestyleConfiguration.h

@@ -29,6 +29,7 @@ Motion::Project::App.setup do |app|
   app.version = '1.0'
   app.pods do
     pod 'AFNetworking'
+    pod 'StylingKit'
   end
 
   # ===========================================================================================
@@ -50,7 +51,7 @@ Motion::Project::App.setup do |app|
   # ===========================================================================================
   # 5. If you need to reference any additional iOS libraries, use the config array below.
   # ===========================================================================================
-  # app.frameworks << "StoreKit"
+  app.frameworks << "StylingKit"
 
   # reasonable defaults
   app.device_family = [:iphone, :ipad]
@@ -123,7 +124,7 @@ Motion::Project::App.setup do |app|
     # 9. If you want to create a beta build. Uncomment the line below and set your profile to
     #    point to your production provisions (Step 8).
     # ===========================================================================================
-   # app.entitlements['beta-reports-active'] = true
+    app.entitlements['beta-reports-active'] = true
   end
 
   def define_icon_defaults!(app)

@@ -21,19 +21,26 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - RSColorPicker (0.9.2)
+  - StylingKit (0.4.3):
+    - StylingKit/Main (= 0.4.3)
+  - StylingKit/Freestyle (0.4.3)
+  - StylingKit/Main (0.4.3):
+    - StylingKit/Freestyle
   - XLForm (3.1.1)
 
 DEPENDENCIES:
   - AFNetworking
   - AFNetworking (~> 2.5.0)
   - RSColorPicker
+  - StylingKit
   - XLForm (= 3.1.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   RSColorPicker: 4d71e12f8e28d44c3885fbb3ba10bc3627bdb393
+  StylingKit: c7be8dbff3fd1ef3190cd86302412fbd852e2e66
   XLForm: c9ee7e0f859341279bfd894f9589a9d25c23e4df
 
-PODFILE CHECKSUM: 648e29fae1fd9ceeeb3c7f81523388612cc32af6
+PODFILE CHECKSUM: 541c62c3a58e0da66ff854e8dc7687d5c030f868
 
 COCOAPODS: 1.4.0

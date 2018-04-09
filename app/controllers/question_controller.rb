@@ -6,7 +6,8 @@ class QuestionController < UIViewController
     self.view = UIView.alloc.init
     self.view.userInteractionEnabled = true
     navigationItem.title = 'Ruby Quiz'
-    self.view.backgroundColor = UIColor.blueColor
+    #self.view.backgroundColor = UIColor.blueColor
+    self.view.styleId = 'questionView'
      @questions = [ {'body' => "Some ruby question.", 'id' => "30", 'title' => "Ruby1", 'correct' => 'True' },
                    { 'body' => "Another Ruby question",'id' => "31", 'title' => "Ruby2", 'correct' => 'True' },
                    {'body' => "last Ruby question", 'id' => "32", 'title' => "Ruby3", 'correct' => 'False' },]
@@ -98,11 +99,12 @@ class QuestionController < UIViewController
     @question_label.color = UIColor.whiteColor
     @question_label.lineBreakMode = UILineBreakModeWordWrap
     @question_label.numberOfLines = 0
-    @question_label.frame = [[40, 142], [359, 213]]
+    @question_label.frame = [48, 120], [267, 151]
     view.addSubview @question_label
 
     answer_true = UIButton.buttonWithType(UIButtonTypeCustom)
-    answer_true.frame = [[10,380], [155,56]]
+    answer_true.styleClass = 'btn-green'
+    answer_true.frame = [[10,380], [100,56]]
     answer_true.setTitle "True" , forState: UIControlStateNormal
     answer_true.backgroundColor = UIColor.greenColor
     answer_true.tag = 0
@@ -110,7 +112,8 @@ class QuestionController < UIViewController
     view.addSubview answer_true
 
     answer_false = UIButton.buttonWithType(UIButtonTypeCustom)
-    answer_false.frame = [[194,380], [155,56]]
+    answer_false.styleClass = 'btn-green'
+    answer_false.frame = [[194,380], [100,56]]
     answer_false.setTitle "True" , forState: UIControlStateNormal
     answer_false.backgroundColor = UIColor.redColor
     answer_false.tag = 1
@@ -121,7 +124,7 @@ class QuestionController < UIViewController
     @result_label.font = UIFont.systemFontOfSize(20)
     @result_label.backgroundColor = UIColor.clearColor
     @result_label.textAlignment = UITextAlignmentCenter
-    @result_label.frame = [110, 195], [155, 56]
+    @result_label.frame = [10, 305], [335, 84]
     view.addSubview @result_label
 
     @score_label = UILabel.new
@@ -183,11 +186,11 @@ class QuestionController < UIViewController
     else 
 
       @question_title.text = @questions[@index]['title']
-      @question_title.frame = [[50,60 ], [343, 79]]
+      @question_title.frame = [[10,60 ], [343, 79]]
       @question_title.sizeToFit
 
       @question_label.text = @questions[@index]['body']
-      @question_label.frame = [[50, 142], [359, 213]]
+      @question_label.frame = [[48, 120], [267, 151]]
       @question_label.sizeToFit
     end
   end

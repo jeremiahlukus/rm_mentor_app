@@ -4,6 +4,7 @@ class AppDelegate
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     @navigationController = UINavigationController.alloc.init
     @navigationController.pushViewController(FeedbackController.controller, animated:false)
+    StylingKit.sharedKit.startStyling
 
     @window.rootViewController = @navigationController
     @window.makeKeyAndVisible
